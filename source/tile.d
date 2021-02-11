@@ -71,6 +71,12 @@ public:
 			Vector2(tileRec.x + tileRec.w, tileRec.y + borderSize)
 		);
 	}
+	
+	void reset(){
+		type = 0;
+		flagged = 0;
+		covered = true;
+	}
 
 	void uncover(){
 		if(flagged == 0){
@@ -101,7 +107,7 @@ public:
 			}
 		}
 		else{
-			if(type == -1){
+			if(type == -1 && covered){
 				drawShowBombs();
 			}
 			else{
