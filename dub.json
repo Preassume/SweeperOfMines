@@ -1,13 +1,13 @@
 {
 	"authors": [
-		"Austin"
+		"Austin Riddle"
 	],
-	"copyright": "Copyright © 2021, Austin",
+	"copyright": "Copyright © 2021, Austin Riddle",
 	"dependencies": {
 		"raylib-d": "~>3.0.3"
 	},
 	"libs": [ "raylib" ],
 	"description": "A simple minesweeper clone",
-	"license": "MIT",
+	"license": "GPLv3",
 	"name": "dmine"
 }
