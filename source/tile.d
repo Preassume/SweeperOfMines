@@ -3,6 +3,7 @@ module tileModule;
 import raylib;
 import std.stdio;
 import std.conv;
+import std.string;
 
 struct Triangle{
 	Vector2 p1;
@@ -164,9 +165,8 @@ private:
 					case 7: numColor = Colors.SKYBLUE; break;
 					default: numColor = Colors.BLACK; break;
 				}
-				char num = to!char(type);
-				char* ptr = &num;
-				DrawText(ptr, cast(int)(inRecCovered.x + borderSize / 2), cast(int)(inRecCovered.y), cast(int)(size / 1.2), numColor);
+				string num = to!string(type);
+				DrawText(toStringz(num), cast(int)(inRecCovered.x + borderSize / 2), cast(int)(inRecCovered.y), cast(int)(size / 1.2), numColor);
 			}
 		}
 		else{

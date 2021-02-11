@@ -7,14 +7,14 @@ import sweepModule;
 
 void main()
 {
-	sweep sw1 = new sweep(32, 18, 60);
+	sweep sw1 = new sweep(32, 16, 40, 80);
 	
-	InitWindow(1920, 1080, "DEE   SWEEP");
+	InitWindow(1280, 720, "DEE   SWEEP");
 	
 	while (!WindowShouldClose())
 	{
 		BeginDrawing();
-		ClearBackground(Colors.BLACK);
+		ClearBackground(Colors.GRAY);
 		sw1.draw();
 		EndDrawing();
 	}

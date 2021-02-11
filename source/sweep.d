@@ -8,19 +8,20 @@ class sweep{
 public:
 	tile[][] board;
 	bool gameStarted = false;
-	int width, height, tileSize, numBombs;
+	int width, height, tileSize, numBombs, headerHeight;
 	
-	this(int width, int height, int tileSize){
+	this(int width, int height, int tileSize, int headerHeight){
 		this.width = width;
 		this.height = height;
 		this.tileSize = tileSize;
+		this.headerHeight = headerHeight;
 		
 		numBombs = cast(int)(width * height * 0.12);
 		
 		board = new tile[][](width, height);
         foreach(y; 0 .. height){
             foreach(x; 0 .. width){
-                board[x][y] = new tile(Vector2(x * tileSize, y * tileSize), tileSize);
+                board[x][y] = new tile(Vector2(x * tileSize, y * tileSize + headerHeight), tileSize);
             }
         }
 	}
@@ -81,10 +82,17 @@ public:
 	void mouse(){
 		if(IsMouseButtonReleased(MouseButton.MOUSE_LEFT_BUTTON)){
 			int x = cast(int)(GetMousePosition().x) / tileSize;
-			int y = cast(int)(GetMousePosition().y) / tileSize;
-			writeln(x, ' ', y);
+			int y = cast(int)(GetMousePosition().y - headerHeight) / tileSize;
+			writeln("uncover ", x, ' ', y);
 			
 			uncover(x, y);
+		}
+		if(IsMouseButtonReleased(MouseButton.MOUSE_RIGHT_BUTTON)){
+			int x = cast(int)(GetMousePosition().x) / tileSize;
+			int y = cast(int)(GetMousePosition().y - headerHeight) / tileSize;
+			writeln("flag ", x, ' ', y);
+			
+			board[x][y].flag();
 		}
 	}
 	
