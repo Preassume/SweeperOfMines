@@ -6,7 +6,6 @@ import raylib;
 import std.random;
 import std.datetime.systime;
 
-//TODO: make button class for tile and the header's button to inherit from
 
 
 class sweep{
@@ -34,7 +33,7 @@ public:
 		board = new tile[][](width, height);
         foreach(y; 0 .. height){
             foreach(x; 0 .. width){
-                board[x][y] = new tile(Vector2(x * tileSize, y * tileSize + headerHeight), tileSize);
+                board[x][y] = new tile(x * tileSize, y * tileSize + headerHeight, tileSize);
             }
         }
 	}
@@ -87,7 +86,7 @@ public:
 			writeln("lmb ", x, ' ', y);
 			
 			if(y <= headerHeight){
-				if(CheckCollisionPointRec(GetMousePosition(), topHeader.faceRec)){
+				if(CheckCollisionPointRec(GetMousePosition(), topHeader.asRectangle)){
 					resetGame();
 				}
 			}
@@ -103,9 +102,13 @@ public:
 		}
 		if(IsMouseButtonReleased(MouseButton.MOUSE_RIGHT_BUTTON)){
 			if(dead) return;
-			int x = cast(int)(GetMousePosition().x) / tileSize;
-			int y = cast(int)(GetMousePosition().y - headerHeight) / tileSize;
+			int x = cast(int)(GetMousePosition().x);
+			int y = cast(int)(GetMousePosition().y);
 			writeln("rmb ", x, ' ', y);
+			if(y <= headerHeight) return;
+			x /= tileSize;
+			y -= headerHeight;
+			y /= tileSize;
 			
 			if(x >= 0 && y >= 0 && x < width && y < height){
 				board[x][y].flag();
